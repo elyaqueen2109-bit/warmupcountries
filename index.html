@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries and Nationalities</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #0b1a2f;
+        }
+
+        .game {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(14, 34, 64, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .nebula-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(150, 80, 255, 0.6) 0%, transparent 70%);
+            top: 5%;
+            left: 5%;
+            animation: nebula-float 8s ease-in-out infinite;
+        }
+
+        .nebula-2 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(80, 150, 255, 0.5) 0%, transparent 70%);
+            bottom: 10%;
+            right: 5%;
+            animation: nebula-float 10s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .nebula-3 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 100, 200, 0.4) 0%, transparent 70%);
+            top: 40%;
+            right: 15%;
+            animation: nebula-float 7s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+
+        .nebula-4 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.3) 0%, transparent 70%);
+            bottom: 15%;
+            left: 10%;
+            animation: nebula-float 12s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes nebula-float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translate(30px, -20px) scale(1.1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-20px, 30px) scale(0.95);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translate(15px, -15px) scale(1.05);
+                opacity: 0.6;
+            }
+        }
+
+        .title {
+            color: #ffffff;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.9),
+                0 0 40px rgba(200, 220, 255, 0.7),
+                0 0 80px rgba(150, 180, 255, 0.5);
+            animation: title-float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes title-float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .world {
+            position: relative;
+            width: 560px;
+            height: 560px;
+            margin: 0 auto 10px;
+            z-index: 1;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: sparkle 2s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+
+        .earth-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 580px;
+            height: 580px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(220, 240, 255, 0.9) 0%,
+                rgba(190, 220, 255, 0.55) 25%,
+                rgba(150, 195, 240, 0.3) 45%,
+                rgba(110, 170, 220, 0.1) 60%,
+                transparent 75%
+            );
+            animation: glow-pulse 2.5s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(3px);
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.92);
+                opacity: 0.55;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.18);
+                opacity: 1;
+            }
+        }
+
+        .earth {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            object-fit: cover;
+            z-index: 1;
+            box-shadow: none;
+        }
+
+        .earth-shine {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 480px;
+            height: 480px;
+            transform: translate(-50%, -62%);
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at 30% 25%,
+                rgba(255, 255, 255, 0.35) 0%,
+                rgba(255, 255, 255, 0.1) 25%,
+                transparent 50%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            z-index: 3;
+            transform-origin: center center;
+            animation: fly-orbit 4s linear infinite;
+        }
+
+        .orbit.paused {
+            animation-play-state: paused;
+        }
+
+        .plane {
+            position: absolute;
+            top: -300px;
+            left: -60px;
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            transform: rotate(90deg);
+            transition: all 1s ease;
+            filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.6));
+        }
+
+        @keyframes fly-orbit {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 25px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .lets-fly-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lets-fly-text {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.9),
+                0 0 40px rgba(150, 200, 255, 0.8),
+                0 0 80px rgba(100, 180, 255, 0.6),
+                0 0 120px rgba(80, 160, 255, 0.4);
+            letter-spacing: 3px;
+            animation: text-float 2.5s ease-in-out infinite;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .btn-image {
+            width: 220px;
+            height: auto;
+            object-fit: contain;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: float-neon 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(150, 200, 255, 0.6)) 
+                    drop-shadow(0 0 30px rgba(100, 180, 255, 0.4));
+        }
+
+        .btn-image:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 25px rgba(150, 200, 255, 0.8)) 
+                    drop-shadow(0 0 50px rgba(100, 180, 255, 0.6));
+        }
+
+        .btn-image:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes float-neon {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes text-float {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0px);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-8px);
+            }
+        }
+
+        .card {
+            background: linear-gradient(145deg, #fffdf5, #fff3e0);
+            color: #1e2a3a;
+            border-radius: 28px;
+            padding: 18px 20px;
+            margin-top: 5px;
+            animation: pop 0.4s ease, card-neon 3s ease-in-out infinite;
+            box-shadow: 
+                0 0 40px rgba(180, 130, 255, 0.7),
+                0 0 80px rgba(150, 100, 255, 0.4),
+                0 0 120px rgba(120, 80, 255, 0.2),
+                inset 0 0 30px rgba(200, 170, 255, 0.15);
+            position: relative;
+            z-index: 50;
+            border: 2px solid rgba(180, 140, 255, 0.6);
+        }
+
+        @keyframes pop {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes card-neon {
+            0%, 100% {
+                box-shadow: 
+                    0 0 30px rgba(180, 130, 255, 0.5),
+                    0 0 60px rgba(150, 100, 255, 0.3),
+                    inset 0 0 20px rgba(200, 170, 255, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    0 0 60px rgba(180, 130, 255, 0.9),
+                    0 0 120px rgba(150, 100, 255, 0.5),
+                    0 0 160px rgba(120, 80, 255, 0.3),
+                    inset 0 0 40px rgba(200, 170, 255, 0.25);
+            }
+        }
+
+        .card-image {
+            width: 330px;
+            height: 330px;
+            object-fit: contain;
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .flag-image {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 auto 12px;
+            display: block;
+            box-shadow: 0 0 25px rgba(180, 130, 255, 0.5);
+        }
+
+        .country-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .task {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .hint {
+            font-size: 0.95rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .great-job-text {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #c9a0ff;
+            text-shadow: 
+                0 0 15px rgba(180, 130, 255, 0.9),
+                0 0 40px rgba(150, 100, 255, 0.7),
+                0 0 80px rgba(120, 80, 255, 0.5),
+                0 0 120px rgba(100, 60, 255, 0.3);
+            letter-spacing: 3px;
+            animation: great-job-float 2.5s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes great-job-float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .countdown-display {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #6c5ce7;
+            margin: 10px 0;
+            animation: countdown-pop 0.5s ease;
+        }
+
+        @keyframes countdown-pop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .task-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 12px 0;
+        }
+
+        .task-option {
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            color: white;
+            animation: float-space 3s ease-in-out infinite;
+            letter-spacing: 0.5px;
+        }
+
+        .task-option:nth-child(1) {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            animation-delay: 0s;
+        }
+        .task-option:nth-child(2) {
+            background: linear-gradient(135deg, #e17055, #fab1a0);
+            animation-delay: 0.5s;
+        }
+        .task-option:nth-child(3) {
+            background: linear-gradient(135deg, #00b894, #81ecec);
+            animation-delay: 1s;
+        }
+        .task-option:nth-child(4) {
+            background: linear-gradient(135deg, #fdcb6e, #ffeaa7);
+            color: #1e2a3a;
+            animation-delay: 1.5s;
+        }
+        .task-option:nth-child(5) {
+            background: linear-gradient(135deg, #e84393, #fd79a8);
+            animation-delay: 2s;
+        }
+        .task-option:nth-child(6) {
+            background: linear-gradient(135deg, #0984e3, #74b9ff);
+            animation-delay: 2.5s;
+        }
+
+        @keyframes float-space {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .task-option:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .task-option:disabled {
+            cursor: default;
+            opacity: 0.6;
+            animation: none;
+        }
+
+        .task-option.correct {
+            background: #4caf50 !important;
+            color: white;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .task-option.wrong {
+            background: #f44336 !important;
+            color: white;
+            box-shadow: 0 0 20px rgba(244, 67, 54, 0.6);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .fly-again-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn-image-small {
+            width: 160px;
+            height: auto;
+            object-fit: contain;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: float-neon 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(150, 200, 255, 0.6)) 
+                    drop-shadow(0 0 30px rgba(100, 180, 255, 0.4));
+        }
+
+        .btn-image-small:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 25px rgba(150, 200, 255, 0.8)) 
+                    drop-shadow(0 0 50px rgba(100, 180, 255, 0.6));
+        }
+
+        .fly-again-text {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.9),
+                0 0 40px rgba(150, 200, 255, 0.8),
+                0 0 80px rgba(100, 180, 255, 0.6),
+                0 0 120px rgba(80, 160, 255, 0.4);
+            letter-spacing: 3px;
+            animation: text-float 2.5s ease-in-out infinite;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 600px) {
+            .world {
+                width: 350px;
+                height: 350px;
+            }
+            .earth {
+                width: 310px;
+                height: 310px;
+            }
+            .earth-glow {
+                width: 370px;
+                height: 370px;
+            }
+            .earth-shine {
+                width: 290px;
+                height: 290px;
+            }
+            .plane {
+                top: -190px;
+                left: -40px;
+                width: 80px;
+                height: 80px;
+            }
+            .card-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game">
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+        <div class="nebula nebula-4"></div>
+
+        <h1 class="title">Countries and Nationalities</h1>
+
+        <div class="world">
+            <div class="stars" id="starsContainer"></div>
+            <div class="earth-glow"></div>
+            <img src="earth.png" class="earth" alt="Earth" onerror="this.onerror=null; this.src='earth.jpg'">
+            <div class="earth-shine"></div>
+            <div class="orbit" id="orbit">
+                <img src="plane.png" class="plane" id="plane" alt="Plane" onerror="this.onerror=null; this.src='plane.jpg'">
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="lets-fly-wrapper">
+                <div class="lets-fly-text">LET'S FLY</div>
+                <img src="button.png" class="btn-image" onclick="fly()" alt="Let's fly" onerror="this.onerror=null; this.src='button.jpg'">
+            </div>
+        </div>
+
+        <div id="card" class="card" style="display: none;">
+            <div id="cardContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let audioContext = null;
+        let spaceAmbientStarted = false;
+
+        function getAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioContext;
+        }
+
+        function startSpaceAmbient() {
+            if (spaceAmbientStarted) return;
+            spaceAmbientStarted = true;
+            const ctx = getAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            oscillator.type = 'sine';
+            oscillator.frequency.value = 55;
+            gainNode.gain.value = 0.08;
+            oscillator.start();
+            oscillator.frequency.linearRampToValueAtTime(60, ctx.currentTime + 3);
+            oscillator.frequency.linearRampToValueAtTime(50, ctx.currentTime + 6);
+            oscillator.frequency.linearRampToValueAtTime(58, ctx.currentTime + 9);
+        }
+
+        window.addEventListener('load', function() {
+            startSpaceAmbient();
+            createStars();
+        });
+
+        document.addEventListener('click', function() {
+            startSpaceAmbient();
+        });
+
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3 + 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(star);
+            }
+            for (let i = 0; i < 10; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = (Math.random() * 60 + 20) + '%';
+                sparkle.style.top = (Math.random() * 60 + 20) + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparkle.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                container.appendChild(sparkle);
+            }
+        }
+
+        function playPlaneSound() {
+            const ctx = getAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.value = 120;
+            gainNode.gain.value = 0.08;
+            oscillator.start();
+            oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 2);
+            oscillator.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 4);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 8);
+            oscillator.stop(ctx.currentTime + 8);
+        }
+
+        function playLandingSound() {
+            const ctx = getAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.value = 200;
+            gainNode.gain.value = 0.1;
+            oscillator.start();
+            oscillator.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 1.5);
+            gainNode.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.8);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 2);
+            oscillator.stop(ctx.currentTime + 2);
+        }
+
+        function playCosmicClick() {
+            const ctx = getAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            oscillator.frequency.value = 1200;
+            oscillator.type = 'sine';
+            gainNode.gain.value = 0.2;
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+            oscillator.stop(ctx.currentTime + 0.2);
+        }
+
+        function playTimerTick() {
+            const ctx = getAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            oscillator.frequency.value = 1000;
+            oscillator.type = 'sine';
+            gainNode.gain.value = 0.4;
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+            oscillator.stop(ctx.currentTime + 0.08);
+        }
+
+        function playTimerEnd() {
+            const ctx = getAudioContext();
+            const oscillator = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            oscillator.frequency.value = 600;
+            oscillator.type = 'sine';
+            gainNode.gain.value = 0.5;
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+            oscillator.stop(ctx.currentTime + 0.8);
+        }
+
+        const countries = [
+            { flag: "flag-italy.png", name: "Italy", nationality: "Italian", image: "italy.jpg" },
+            { flag: "flag-brazil.png", name: "Brazil", nationality: "Brazilian", image: "brazil.jpg" },
+            { flag: "flag-uk.png", name: "The UK", nationality: "British", image: "uk.jpg" },
+            { flag: "flag-spain.png", name: "Spain", nationality: "Spanish", image: "spain.jpg" },
+            { flag: "flag-japan.png", name: "Japan", nationality: "Japanese", image: "japan.jpg" },
+            { flag: "flag-china.png", name: "China", nationality: "Chinese", image: "china.jpg" },
+            { flag: "flag-france.png", name: "France", nationality: "French", image: "france.jpg" },
+            { flag: "flag-canada.png", name: "Canada", nationality: "Canadian", image: "canada.jpg" },
+            { flag: "flag-russia.png", name: "Russia", nationality: "Russian", image: "russia.jpg" },
+        ];
+
+        const oddOneOutTasks = [
+            { words: ["Russian", "French", "Italy", "British"], answer: "Italy", explanation: "It's a country, not a nationality" },
+            { words: ["France", "French", "Spain", "Germany"], answer: "French", explanation: "It's a nationality, not a country" },
+            { words: ["London", "Paris", "English", "Rome"], answer: "English", explanation: "It's a language, not a city" },
+            { words: ["Chinese", "Japan", "Japanese", "British"], answer: "Japan", explanation: "It's a country, not a nationality" },
+        ];
+
+        const trueFalseTasks = [
+            { flag: "flag-uk.png", text: "People from the UK are British.", answer: true },
+            { flag: "flag-uk.png", text: "People from the UK are French.", answer: false, correction: "British" },
+            { flag: "flag-japan.png", text: "People from Japan are Japanese.", answer: true },
+            { flag: "flag-brazil.png", text: "People from Brazil are Spanish.", answer: false, correction: "Brazilian" },
+            { flag: "flag-france.png", text: "People from France are French.", answer: true },
+            { flag: "flag-canada.png", text: "People from Canada are Canadian.", answer: true },
+            { flag: "flag-italy.png", text: "People from Italy are Italian.", answer: true },
+            { flag: "flag-china.png", text: "People from China are Japanese.", answer: false, correction: "Chinese" },
+            { flag: "flag-russia.png", text: "People from Russia are Russian.", answer: true },
+            { flag: "flag-spain.png", text: "People from Spain are Spanish.", answer: true },
+        ];
+
+        const speakingTasks = [
+            { text: "Where are you from?", answer: "I'm from..." },
+            { text: "What nationality are you?", answer: "I'm..." },
+            { text: "What country do you want to visit?", answer: "I want to visit..." },
+            { text: "What language do people speak in Spain?", answer: "Spanish" },
+            { text: "What nationality is your favourite singer?", answer: "He/She is..." },
+            { text: "What is the capital of your country?", answer: "The capital is..." },
+            { text: "What languages do you speak?", answer: "I speak..." },
+            { text: "What country is famous for sushi?", answer: "Japan" },
+        ];
+
+        const guessTasks = [
+            { hint: "It's an island. People speak English.", answer: "The UK", image: "uk.jpg" },
+            { hint: "It's famous for pizza and pasta.", answer: "Italy", image: "italy.jpg" },
+            { hint: "People speak Portuguese.", answer: "Brazil", image: "brazil.jpg" },
+            { hint: "It has kangaroos.", answer: "Australia", image: "australia.jpg" },
+            { hint: "It has the Eiffel Tower.", answer: "France", image: "france.jpg" },
+            { hint: "It's famous for sushi and cherry blossoms.", answer: "Japan", image: "japan.jpg" },
+            { hint: "It's famous for flamenco and paella.", answer: "Spain", image: "spain.jpg" },
+            { hint: "It has the Great Wall.", answer: "China", image: "china.jpg" },
+        ];
+
+        const fastWordsTasks = [
+            { text: "Name three countries" },
+            { text: "Name three nationalities" },
+            { text: "Name three cities" },
+            { text: "Name three languages" },
+            { text: "Name three flags" },
+        ];
+
+        let currentCategory = null;
+        let currentTaskIndex = 0;
+        let currentTasks = [];
+        let timerInterval = null;
+        let isFlying = false;
+        let availableCategories = ['odd', 'truefalse', 'speaking', 'guess', 'flags', 'fastwords'];
+
+        function pickCategory() {
+            if (availableCategories.length === 0) {
+                availableCategories = ['odd', 'truefalse', 'speaking', 'guess', 'flags', 'fastwords'];
+            }
+            
+            const randomIndex = Math.floor(Math.random() * availableCategories.length);
+            currentCategory = availableCategories[randomIndex];
+            availableCategories.splice(randomIndex, 1);
+            currentTaskIndex = 0;
+
+            switch (currentCategory) {
+                case 'odd':
+                    currentTasks = [...oddOneOutTasks].sort(() => Math.random() - 0.5).slice(0, 3);
+                    renderOddOneOut();
+                    break;
+                case 'truefalse':
+                    currentTasks = [...trueFalseTasks].sort(() => Math.random() - 0.5).slice(0, 4);
+                    renderTrueFalse();
+                    break;
+                case 'speaking':
+                    currentTasks = [...speakingTasks].sort(() => Math.random() - 0.5);
+                    renderSpeaking();
+                    break;
+                case 'guess':
+                    currentTasks = [...guessTasks].sort(() => Math.random() - 0.5);
+                    renderGuess();
+                    break;
+                case 'flags':
+                    currentTasks = [...countries].sort(() => Math.random() - 0.5);
+                    renderFlag();
+                    break;
+                case 'fastwords':
+                    renderFastWords();
+                    break;
+            }
+        }
+
+        function fly() {
+            if (isFlying) return;
+            isFlying = true;
+            startSpaceAmbient();
+            playCosmicClick();
+            playPlaneSound();
+
+            const orbit = document.getElementById('orbit');
+            const plane = document.getElementById('plane');
+            const card = document.getElementById('card');
+
+            card.style.display = 'none';
+            orbit.classList.remove('paused');
+            orbit.style.animation = 'none';
+            orbit.offsetHeight;
+            orbit.style.animation = 'fly-orbit 4s linear infinite';
+
+            setTimeout(() => {
+                orbit.classList.add('paused');
+                plane.style.top = '-100px';
+                plane.style.left = '-40px';
+                plane.style.transform = 'rotate(-20deg) scale(0.85)';
+                playLandingSound();
+
+                setTimeout(() => {
+                    card.style.display = 'block';
+                    card.style.position = 'absolute';
+                    card.style.top = '50%';
+                    card.style.left = '50%';
+                    card.style.transform = 'translate(-50%, -50%)';
+                    card.style.zIndex = '50';
+                    card.style.maxWidth = '480px';
+                    card.style.width = '90%';
+                    pickCategory();
+                    isFlying = false;
+                }, 800);
+            }, 8000);
+        }
+
+        function flyAgain() {
+            startSpaceAmbient();
+            playCosmicClick();
+            playPlaneSound();
+
+            const orbit = document.getElementById('orbit');
+            const plane = document.getElementById('plane');
+            const card = document.getElementById('card');
+
+            card.style.display = 'none';
+            orbit.classList.remove('paused');
+            orbit.style.animation = 'none';
+            orbit.offsetHeight;
+            orbit.style.animation = 'fly-orbit 4s linear infinite';
+            plane.style.top = '-300px';
+            plane.style.left = '-60px';
+            plane.style.transform = 'rotate(90deg)';
+
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+
+            setTimeout(() => {
+                orbit.classList.add('paused');
+                plane.style.top = '-100px';
+                plane.style.left = '-40px';
+                plane.style.transform = 'rotate(-20deg) scale(0.85)';
+                playLandingSound();
+
+                setTimeout(() => {
+                    card.style.display = 'block';
+                    card.style.position = 'absolute';
+                    card.style.top = '50%';
+                    card.style.left = '50%';
+                    card.style.transform = 'translate(-50%, -50%)';
+                    card.style.zIndex = '50';
+                    card.style.maxWidth = '480px';
+                    card.style.width = '90%';
+                    pickCategory();
+                }, 800);
+            }, 8000);
+        }
+
+        function renderOddOneOut() {
+            const task = currentTasks[currentTaskIndex];
+            const content = document.getElementById('cardContent');
+            let optionsHTML = '';
+            task.words.forEach(word => {
+                optionsHTML += `<button class="task-option" onclick="checkOddOneOut(this, '${word}', '${task.answer}')">${word}</button>`;
+            });
+            content.innerHTML = `
+                <div class="country-name">Odd One Out ${currentTaskIndex + 1}/${currentTasks.length}</div>
+                <div class="task">Find the odd one out:</div>
+                <div class="task-options">${optionsHTML}</div>
+                <div class="hint" id="oddExplanation" style="display: none;">${task.answer} — ${task.explanation}</div>
+                <button class="btn-next" id="nextBtn" style="display: none;" onclick="nextInCategory()">Next →</button>
+            `;
+        }
+
+        function checkOddOneOut(btn, selected, correct) {
+            const buttons = btn.parentElement.querySelectorAll('.task-option');
+            buttons.forEach(b => {
+                b.disabled = true;
+                if (b.textContent === correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && selected !== correct) {
+                    b.classList.add('wrong');
+                }
+            });
+            document.getElementById('oddExplanation').style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            playCosmicClick();
+        }
+
+        function renderTrueFalse() {
+            const task = currentTasks[currentTaskIndex];
+            const content = document.getElementById('cardContent');
+            content.innerHTML = `
+                <img src="${task.flag}" class="flag-image" alt="Flag" onerror="this.onerror=null; this.src='${task.flag.replace('.png', '.jpg')}'">
+                <div class="country-name">True or False ${currentTaskIndex + 1}/${currentTasks.length}</div>
+                <div class="task">${task.text}</div>
+                <div class="task-options">
+                    <button class="task-option" onclick="checkTrueFalse(this, true, ${task.answer})">✅ True</button>
+                    <button class="task-option" onclick="checkTrueFalse(this, false, ${task.answer})">❌ False</button>
+                </div>
+                <div class="hint" id="tfExplanation" style="display: none;">${task.answer ? 'Correct! ✅' : 'Correct answer: ' + (task.correction || 'False')}</div>
+                <button class="btn-next" onclick="nextInCategory()">Next →</button>
+            `;
+        }
+
+        function checkTrueFalse(btn, selected, correct) {
+            const buttons = btn.parentElement.querySelectorAll('.task-option');
+            buttons.forEach(b => {
+                b.disabled = true;
+                if ((b.textContent.includes('True') && correct) || (b.textContent.includes('False') && !correct)) {
+                    b.classList.add('correct');
+                } else if (b === btn && selected !== correct) {
+                    b.classList.add('wrong');
+                }
+            });
+            document.getElementById('tfExplanation').style.display = 'block';
+            playCosmicClick();
+        }
+
+        function renderSpeaking() {
+            const task = currentTasks[currentTaskIndex];
+            const content = document.getElementById('cardContent');
+            content.innerHTML = `
+                <div class="country-name">Speaking ${currentTaskIndex + 1}/${currentTasks.length}</div>
+                <div class="task">${task.text}</div>
+                <div class="task-options">
+                    <button class="task-option" onclick="revealAnswer(this)">Show answer</button>
+                </div>
+                <div class="hint" id="answerReveal" style="display: none;">${task.answer}</div>
+                <button class="btn-next" onclick="nextInCategory()">Next →</button>
+            `;
+        }
+
+        function renderGuess() {
+            const task = currentTasks[currentTaskIndex];
+            const content = document.getElementById('cardContent');
+            content.innerHTML = `
+                <img src="${task.image}" class="card-image" alt="${task.answer}" onerror="this.onerror=null; this.src='${task.image.replace('.jpg', '.jpeg')}'">
+                <div class="country-name">Guess the Country ${currentTaskIndex + 1}/${currentTasks.length}</div>
+                <div class="task">${task.hint}</div>
+                <div class="task-options">
+                    <button class="task-option" onclick="revealAnswer(this)">Show answer</button>
+                </div>
+                <div class="hint" id="answerReveal" style="display: none;">Answer: ${task.answer}</div>
+                <button class="btn-next" onclick="nextInCategory()">Next →</button>
+            `;
+        }
+
+        function renderFlag() {
+            const country = currentTasks[currentTaskIndex];
+            const content = document.getElementById('cardContent');
+            content.innerHTML = `
+                <img src="${country.flag}" class="flag-image" alt="${country.name}" onerror="this.onerror=null; this.src='${country.flag.replace('.png', '.jpg')}'">
+                <div class="country-name">Flags ${currentTaskIndex + 1}/${currentTasks.length}</div>
+                <div class="task">What country is this? What nationality are people from this country?</div>
+                <div class="task-options">
+                    <button class="task-option" onclick="revealAnswer(this)">Show answer</button>
+                </div>
+                <div class="hint" id="answerReveal" style="display: none;">${country.name} — ${country.nationality}</div>
+                <button class="btn-next" onclick="nextInCategory()">Next →</button>
+            `;
+        }
+
+        function revealAnswer(btn) {
+            btn.style.display = 'none';
+            document.getElementById('answerReveal').style.display = 'block';
+            playCosmicClick();
+        }
+
+        function renderFastWords() {
+            const content = document.getElementById('cardContent');
+            const shuffledTasks = [...fastWordsTasks].sort(() => Math.random() - 0.5).slice(0, 5);
+            let currentFastIndex = 0;
+            let wordCount = 0;
+            let fastInterval = null;
+            let countdownInterval = null;
+
+            function showFastWord() {
+                if (currentFastIndex >= shuffledTasks.length) {
+                    content.innerHTML = `
+                        <div class="country-name">Fast Words Complete!</div>
+                        <div class="score">Total words: ${wordCount}</div>
+                        <div class="fly-again-wrapper">
+                            <div class="fly-again-text">FLY AGAIN</div>
+                            <img src="button.png" class="btn-image-small" onclick="flyAgain()" alt="Fly again" onerror="this.onerror=null; this.src='button.jpg'">
+                        </div>
+                    `;
+                    return;
+                }
+
+                const task = shuffledTasks[currentFastIndex];
+                content.innerHTML = `
+                    <div class="country-name">Fast Words ${currentFastIndex + 1}/${shuffledTasks.length}</div>
+                    <div class="task">${task.text}</div>
+                    <div class="countdown-display" id="countdownDisplay">3</div>
+                    <div class="score" id="scoreDisplay">Words: ${wordCount}</div>
+                    <div class="task-options">
+                        <button class="task-option" id="wordBtn" onclick="addFastWord()" style="display: none;">➕ Word</button>
+                    </div>
+                `;
+
+                let countdown = 3;
+                const countdownDisplay = document.getElementById('countdownDisplay');
+                countdownInterval = setInterval(() => {
+                    countdown--;
+                    if (countdown > 0) {
+                        countdownDisplay.textContent = countdown;
+                        playTimerTick();
+                        countdownDisplay.style.animation = 'none';
+                        countdownDisplay.offsetHeight;
+                        countdownDisplay.style.animation = 'countdown-pop 0.5s ease';
+                    } else {
+                        clearInterval(countdownInterval);
+                        countdownDisplay.textContent = 'GO!';
+                        playCosmicClick();
+                        document.getElementById('wordBtn').style.display = 'inline-block';
+                        startFastTimer();
+                    }
+                }, 800);
+            }
+
+            function startFastTimer() {
+                let timeLeft = 10;
+                const timerDisplay = document.getElementById('countdownDisplay');
+                timerDisplay.textContent = `${timeLeft}s`;
+                timerDisplay.style.fontSize = '2.5rem';
+                timerDisplay.style.color = '#f0a04b';
+                fastInterval = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.textContent = `${timeLeft}s`;
+                    playTimerTick();
+                    if (timeLeft <= 0) {
+                        clearInterval(fastInterval);
+                        playTimerEnd();
+                        timerDisplay.textContent = "⏰";
+                        document.getElementById('wordBtn').disabled = true;
+                        setTimeout(() => {
+                            currentFastIndex++;
+                            showFastWord();
+                        }, 800);
+                    }
+                }, 1000);
+            }
+
+            function addFastWord() {
+                wordCount++;
+                document.getElementById('scoreDisplay').textContent = `Words: ${wordCount}`;
+                playCosmicClick();
+            }
+
+            window.addFastWord = addFastWord;
+            showFastWord();
+        }
+
+        function nextInCategory() {
+            playCosmicClick();
+            currentTaskIndex++;
+            if (currentTaskIndex < currentTasks.length) {
+                switch (currentCategory) {
+                    case 'odd': renderOddOneOut(); break;
+                    case 'truefalse': renderTrueFalse(); break;
+                    case 'speaking': renderSpeaking(); break;
+                    case 'guess': renderGuess(); break;
+                    case 'flags': renderFlag(); break;
+                }
+            } else {
+                document.getElementById('cardContent').innerHTML = `
+                    <div class="great-job-text">GREAT JOB!</div>
+                    <div class="task">Category completed!</div>
+                    <div class="fly-again-wrapper">
+                        <div class="fly-again-text">FLY AGAIN</div>
+                        <img src="button.png" class="btn-image-small" onclick="flyAgain()" alt="Fly again" onerror="this.onerror=null; this.src='button.jpg'">
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
